@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan: Nur Fadilah & Amir Hamzah — Soft Pink Romantic</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/a2e0e6f51b.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root{
+      --pink-100:#fff5f8;
+      --pink-200:#fde6ef;
+      --pink-300:#f9d9e6;
+      --accent:#d4979f;
+      --gold:#c49b66;
+      --text:#3e2b2b;
+    }
+
+    .lokasi-section {
+  width: 100%;
+  padding: 40px 0;
+  background: #fff;
+}
+
+/* Peta responsif penuh */
+.map-wrapper iframe {
+  width: 100%;
+  height: 400px;
+  border: 0;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Di tablet/laptop, tinggi peta lebih besar */
+@media (min-width: 768px) {
+  .map-wrapper iframe {
+    height: 450px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .map-wrapper iframe {
+    height: 550px;
+  }
+}
+
+.quote-frame {
+  max-width: 650px;
+  background: linear-gradient(145deg, rgba(255, 240, 245, 0.9), rgba(255, 250, 250, 0.8));
+  border-radius: 30px;
+  border: 3px solid transparent;
+  border-image: linear-gradient(120deg, #f8bfc8, #d3a4a7, #f8dada) 1;
+  box-shadow: 0 8px 25px rgba(200, 120, 120, 0.25);
+  font-family: 'Dancing Script', cursive;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quote-frame:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(200, 120, 120, 0.3);
+}
+
+.quote-text {
+  color: #a0525c;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+  z-index: 2;
+  position: relative;
+}
+
+/* Hiasan bunga di kiri atas */
+.bunga-dekor {
+  position: absolute;
+  top: -10px;
+  left: -15px;
+  width: 100px;
+  opacity: 0.9;
+  transform: rotate(-10deg);
+  z-index: 1;
+}
+
+/* Responsif di HP */
+@media (max-width: 576px) {
+  .quote-frame {
+    max-width: 90%;
+    border-radius: 20px;
+  }
+  .quote-text {
+    font-size: 1.2rem;
+  }
+  .bunga-dekor {
+    width: 60px;
+    top: -20px;
+    left: -20px;
+  }
+}
+
+
+    *{box-sizing:border-box}
+    body{
+      font-family:'Poppins',sans-serif;
+      background: linear-gradient(180deg,var(--pink-100),#fff);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* background parallax image */
+    .hero-bg{
+      position:fixed; inset:0; z-index:-2;
+      background-image: url('https://wallpapers.com/images/featured-full/wedding-background-x6ra967epnzel22v.jpg');
+      background-size:cover; background-position:center;
+      transform:translateZ(0);
+      filter: brightness(0.9) saturate(1.02);
+      background-attachment: fixed;
+      transition: filter .6s ease, transform .6s ease;
+    }
+
+    .particles {
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    /* floating petals overlay */
+    .petals {
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255,240,245,0.25) 0 5%, transparent 6%),
+                        radial-gradient(circle at 80% 30%, rgba(255,230,240,0.18) 0 6%, transparent 7%),
+                        radial-gradient(circle at 40% 80%, rgba(255,245,247,0.14) 0 8%, transparent 9%);
+      mix-blend-mode: screen;
+    }
+
+    /* Intro (full-screen) */
+    .intro {
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:14px; text-align:center; z-index:9999;
+      backdrop-filter: blur(0px);
+      transition: opacity .5s ease, transform .6s ease;
+    }
+    .intro.hidden{opacity:0;pointer-events:none;transform:translateY(-10px) scale(.995)}
+    .intro video{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-3;
+      filter:brightness(.55);
+    }
+    .intro .card{
+      width: min(760px,92%); border-radius:18px; padding:34px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.12); box-shadow:0 10px 40px rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px) saturate(1.05);
+      color:#fff;
+    }
+    .intro h1{font-size:28px; font-weight:700; letter-spacing:0.6px; margin-bottom:6px}
+    .intro h2{font-weight:500; opacity:.95; margin-bottom:14px}
+    .btn-open{
+      border-radius:999px; padding:12px 28px; font-weight:600; font-size:15px;
+      background:linear-gradient(135deg,var(--gold),#b48b5e); color:white; border:none;
+      box-shadow:0 6px 20px rgba(180,139,94,0.18);
+    }
+    .btn-open:active{transform:translateY(1px)}
+
+    /* Main container */
+    main{display:none; padding-top:70px; padding-bottom:60px; min-height:100vh;}
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.70));
+      border-radius:16px;
+      padding:26px;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 10px 30px rgba(50,20,20,0.06);
+    }
+
+    /* header names */
+    .hero-title{
+      text-align:center; margin-bottom:18px;
+    }
+    .hero-title h1{font-size:30px; color:var(--text); font-weight:700}
+    .hero-title p{color:#77605f; margin-top:8px}
+
+    /* profile row */
+    .mempelai-img{
+      width:140px; height:140px; object-fit:cover; border-radius:50%;
+      border:5px solid rgba(212,149,159,0.16); box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      background:#fff;
+    }
+    .andbig{font-size:28px; color:var(--accent); font-weight:700}
+
+    /* countdown */
+    .countdown{
+      display:flex; gap:12px; justify-content:center; align-items:center; margin-top:10px;
+    }
+    .count-item{
+      background:linear-gradient(180deg,#fff,#fff7f6); border-radius:10px; padding:12px 16px;
+      min-width:80px; text-align:center; box-shadow:0 6px 18px rgba(205,160,160,0.06);
+    }
+    .count-item .num{font-weight:700; font-size:18px; color:var(--text)}
+    .count-item .lbl{font-size:12px; color:#7a5b59}
+
+
+    /* maps card */
+    .map-card{border-radius:12px; overflow:hidden; border:1px solid rgba(0,0,0,0.05)}
+
+    /* rekening */
+    .rekening-box{display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap}
+    .rekening-num{background:#fff; padding:10px 14px; border-radius:10px; font-weight:700; color:var(--text); box-shadow:0 6px 16px rgba(200,150,150,0.06)}
+    .btn-copy{background:var(--accent); color:#fff; border-radius:10px; padding:8px 12px; border:none}
+
+    /* guest list */
+    .guest-list .card{border-radius:10px; margin-bottom:10px; padding:12px; background:linear-gradient(180deg,#fff,#fffefc)}
+
+    /* footer */
+    footer{margin-top:36px; text-align:center; color:#7d5d5f; font-size:14px}
+
+    /* small screens */
+    @media (max-width:768px){
+      .mempelai-img{width:110px;height:110px}
+      .count-item{min-width:62px;padding:10px}
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Musik otomatis -->
+<audio id="bgm" autoplay loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>   
+
+<script>
+document.addEventListener('click', function() {
+  const audio = document.getElementById('bgm');
+  audio.play();
+}, { once: true });
+</script>
+
+<!-- Efek bunga jatuh cepat dan ramai -->
+<script>
+const flowerImages = ['bunga_sakura.png']; 
+
+function createFlower() {
+  const flower = document.createElement('img');
+  flower.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+  flower.className = 'flower';
+  flower.style.left = Math.random() * 100 + 'vw';
+  flower.style.width = 18 + Math.random() * 20 + 'px';
+  flower.style.animationDuration = 5 + Math.random() * 3 + 's';
+  flower.style.animationDelay = Math.random() * 2 + 's';
+  document.body.appendChild(flower);
+  setTimeout(() => flower.remove(), 9000);
+}
+
+setInterval(createFlower, 200);
+</script>
+
+<!-- Efek fade-in dan floating -->
+<style>
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes floating {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.floating {
+  animation: floating 4s ease-in-out infinite;
+}
+
+/* Hover tombol */
+.btn:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Bunga jatuh */
+.flower {
+  position: fixed;
+  top: -10px;
+  pointer-events: none;
+  animation: fall linear forwards;
+  z-index: 999;
+}
+@keyframes fall {
+  0% {transform: translateY(0) rotate(0deg); opacity:1;}
+  100% {transform: translateY(110vh) rotate(360deg); opacity:0;}
+}
+</style>
+
+
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="petals" aria-hidden="true"></div>
+
+  <!-- Intro -->
+  <div class="intro" id="intro">
+    <div class="card text-center">
+      <img src="FOTO ANIMASI.jpg" alt="Mempelai" style="width:140px;height:120px;border-radius:50%;display:block;margin:8px auto 10px">
+      <h1>Nur Fadilah &amp; Amir Hamzah</h1>
+      <h2>Undangan Pernikahan</h2>
+      <p style="opacity:.9;margin-top:8px">Rabu, 5 November 2025 · 10.00 WITA · Kediaman Mempelai Wanita</p>
+      <div style="margin-top:18px">
+        <button class="btn-open" id="openBtn">Buka Undangan</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="pageMain">
+
+    <div class="container">
+
+      <!-- hero glass -->
+      <div class="glass" data-aos="fade-up" data-aos-duration="800">
+        <div class="hero-title">
+          <h1>Assalamu'alaikum Warahmatullahi Wabarakatuh</h1>
+          <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Anda hadir di hari bahagia kami.</p>
+        </div>
+
+        <!-- profile -->
+        <div class="row align-items-center text-center">
+          <div class="col-md-4 mb-3" data-aos="fade-right">
+            <img src="FOTO MEMPELAI PEREMPUAN.jpg" class="mempelai-img mx-auto d-block" alt="Nurfadilah">
+            <h4 style="font-family: 'Great Vibes', cursive; font-size:32px; color:#b85c5c;">
+              Nur Fadilah </h4>
+            <p class="mb-0 text-muted"><i>Putri dari Husain K. &amp; Suriani M.</i></p>
+          </div>
+
+          <div class="col-md-4" data-aos="zoom-in">
+            <div class="andbig"> &amp; </div>
+            <div class="mt-3 d-none d-md-block">
+              <div class="countdown" id="countdownShort">
+                <!-- small preview countdown (JS fills) -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3" data-aos="fade-left">
+            <img src="FOTO MEMPELAI LAKI-LAKI.jpg" class="mempelai-img mx-auto d-block" alt="Amir Hamzah">
+            <h4 style="font-family: 'Great Vibes', cursive; font-size:32px; color:#b85c5c;">
+              Amir Hamzah</h4>
+            <p class="mb-0 text-muted"><i>Putra dari Dr.Muhammad Said &amp; Suryani</i></p>
+          </div>
+        </div>
+
+        <!-- date & place -->
+        <div class="row mt-4 text-center" data-aos="fade-up" data-aos-delay="120">
+          <div class="col-md-4 mb-3">
+            <div class="count-item">
+              <div class="num">📅 5 November 2025</div>
+              <div class="num">(Acara Siang & Acara Malam)</div>
+              <div class="lbl">Tanggal</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="count-item">
+              <div class="num">⏰ Akad: 10:00 WITA </div>
+              <div class="num">⏰ Resepsi: 19:00 WITA - Sampai Selesai </div>
+              <div class="lbl">Waktu</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="count-item">
+              <div class="num">📌 Jln. Kubis, Dusun Palece Desa Ugibaru (Belakang Masjid Nurul Haadi)</div>
+              <div class="lbl">Tempat</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- countdown full -->
+        <div class="text-center mt-3" data-aos="fade-up" data-aos-delay="180">
+          <div id="countdown" style="display:flex;gap:10px;justify-content:center"></div>
+        </div>
+
+        <hr class="my-4">
+        
+       
+    <!-- Quotes Carousel Elegan -->
+    <div id="quoteCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner text-center">
+    
+        <!-- Item 1 -->
+        <div class="carousel-item active">
+          <div class="p-3">
+            <img src="animasi.png" class="d-block mx-auto rounded-3" alt="animasi 1" style="max-height:300px;">
+            
+            <div class="quote-frame mx-auto mt-3 p-4 position-relative">
+              <img src="BUNGA.png" alt="dekor bunga" class="bunga-dekor">
+              <p class="quote-text">
+                “Pernikahan yang hebat bukan saat pasangan yang sempurna terbentuk bersama. Justru ketika pasangan yang tidak sempurna belajar untuk menikmati perbedaan mereka.”
+              </p>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Item 2 -->
+        <div class="carousel-item">
+          <div class="p-3">
+            <img src="animasi2.png" class="d-block mx-auto rounded-3" alt="animasi 2" style="max-height:300px;">
+            
+            <div class="quote-frame mx-auto mt-3 p-4 position-relative">
+              <img src="BUNGA.png" alt="dekor bunga" class="bunga-dekor">
+              <p class="quote-text">
+                “Cinta bukan hanya saling memandang, tetapi juga melihat keluar bersama ke arah yang sama.”
+              </p>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Item 3 -->
+        <div class="carousel-item">
+          <div class="p-3">
+            <img src="animasi1.png" class="d-block mx-auto rounded-3" alt="animasi 3" style="max-height:300px;">
+            
+            <div class="quote-frame mx-auto mt-3 p-4 position-relative">
+              <img src="BUNGA.png" alt="dekor bunga" class="bunga-dekor">
+              <p class="quote-text">
+                “Dua hati yang dipersatukan dalam cinta, berjalan bersama dalam doa, dan tumbuh dalam kesetiaan. AAMIIN”
+              </p>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+    
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#quoteCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#quoteCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<section class="lokasi-section" id="lokasi" data-aos="fade-right">
+  <div class="container-fluid px-0">
+    <h5 class="section-title text-center mb-3">Lokasi</h5>
+
+    <div class="map-wrapper mb-3">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.209362874491!2d119.1978548!3d-3.4049145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d949a9ba8c877bb%3A0xc227dd63d4352e62!2sMasjid%20NURUL%20HAADI!5e0!3m2!1sen!2sid!4v1708479200000!5m2!1sen!2sid" 
+        allowfullscreen 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div class="text-center mb-4">
+      <a href="https://maps.app.goo.gl/1W1z5rhuLTPUQdQM8" target="_blank" class="btn btn-outline-dark px-4 py-2">
+        Buka di Google Maps
+      </a>
+    </div>
+
+    <div class="mt-3 text-center">
+      <h6 class="mb-1">Hadiah / Rekening</h6>
+      <div class="rekening-box d-inline-flex align-items-center gap-2">
+        <div class="rekening-num" id="rekeningText" data-rek="064501016609505">064501016609505 (BRI)</div>
+        <button class="btn-copy btn btn-sm btn-outline-secondary" id="copyBtn">Salin</button>
+      </div>
+      <small class="d-block text-muted mt-2">a.n. Nur Fadilah</small>
+    </div>
+  </div>
+</section>
+
+
+        <hr class="my-4">
+
+        <!-- guest form -->
+        <div data-aos="fade-up">
+          <h5 class="section-title text-center">Ucapan & Doa</h5>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="mb-3">
+                <input id="guestName" class="form-control" placeholder="Nama Anda" />
+              </div>
+              <div class="mb-3">
+                <textarea id="guestMsg" rows="3" class="form-control" placeholder="Ucapan untuk mempelai..."></textarea>
+              </div>
+              <div class="d-grid">
+                <button class="btn btn-pink btn-lg" id="sendGuest" style="background:var(--accent);color:#fff;border-radius:12px;border:none">Kirim Ucapan</button>
+              </div>
+
+              <div class="mt-4 guest-list" id="guestList"></div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="mt-5">
+          <p>Terima kasih atas doa dan kehadiran Anda.</p>
+        </footer>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- Optional: set SHEET_URL to enable saving to Google Sheets -->
+  <script>
+    const SHEET_URL = ""; // <-- kalau mau simpan ke Google Sheets, masukkan URL Web App di sini
+
+    // open animation + reveal
+    const openBtn = document.getElementById('openBtn');
+    const intro = document.getElementById('intro');
+    const pageMain = document.getElementById('pageMain');
+    const heroBg = document.querySelector('.hero-bg');
+
+    openBtn.addEventListener('click', () => {
+      intro.classList.add('hidden');
+      heroBg.style.filter = 'blur(6px) brightness(.9)';
+      setTimeout(() => {
+        pageMain.style.display = 'block';
+        pageMain.scrollIntoView({behavior:'smooth'});
+        try{ document.getElementById('audio')?.play(); }catch(e){}
+      }, 450);
+    });
+
+    // countdown
+    const target = new Date("November 5, 2025 10:00:00").getTime();
+    const cdElem = document.getElementById('countdown');
+    const cdShort = document.getElementById('countdownShort');
+    function updateCountdown(){
+      const now = Date.now();
+      const diff = target - now;
+      if(diff <= 0){ cdElem.innerHTML = '<div class="text-muted">Acara telah berlangsung</div>'; cdShort && (cdShort.innerHTML='-- hari'); return; }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor(diff % (1000*60*60*24) / (1000*60*60));
+      const mins = Math.floor(diff % (1000*60*60) / (1000*60));
+      const secs = Math.floor(diff % (1000*60) / 1000);
+      cdElem.innerHTML = `
+        <div class="count-item"><div class="num">${days}</div><div class="lbl">Hari</div></div>
+        <div class="count-item"><div class="num">${hours}</div><div class="lbl">Jam</div></div>
+        <div class="count-item"><div class="num">${mins}</div><div class="lbl">Menit</div></div>
+        <div class="count-item"><div class="num">${secs}</div><div class="lbl">Detik</div></div>
+      `;
+      cdShort && (cdShort.innerHTML = `<div class="count-item"><div class="num">${days}h</div></div>`);
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // copy rekening (only number)
+    const copyBtn = document.getElementById('copyBtn');
+    const rekeningText = document.getElementById('rekeningText');
+    copyBtn.addEventListener('click', async () => {
+      const num = rekeningText.dataset.rek || rekeningText.textContent.trim();
+      try{
+        await navigator.clipboard.writeText(num);
+        copyBtn.textContent = 'Disalin!';
+        setTimeout(()=> copyBtn.textContent = 'Salin', 1400);
+      }catch(e){ alert('Gagal menyalin. Silakan salin manual.'); }
+    });
+
+    // guest form: show locally and optionally send to Google Sheets
+    const sendBtn = document.getElementById('sendGuest');
+    const guestList = document.getElementById('guestList');
+
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    sendBtn.addEventListener('click', async () => {
+      const name = document.getElementById('guestName').value.trim();
+      const msg = document.getElementById('guestMsg').value.trim();
+      if(!name){ alert('Isi nama dulu ya'); return; }
+
+      // prepend to list
+      const card = document.createElement('div');
+      card.className = 'card guest-list-item';
+      card.innerHTML = `<div class="card-body"><strong>${escapeHtml(name)}</strong><div class="mt-2 text-muted">${escapeHtml(msg || '(tanpa ucapan)')}</div></div>`;
+      guestList.insertBefore(card, guestList.firstChild);
+
+      // reset
+      document.getElementById('guestName').value='';
+      document.getElementById('guestMsg').value='';
+
+      // optional: post to Google Sheets (if SHEET_URL set)
+      if(SHEET_URL && SHEET_URL.length>5){
+        try{
+          await fetch(SHEET_URL, {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ nama: name, ucapan: msg })
+          });
+        }catch(err){
+          console.warn('Gagal kirim ke sheet:', err);
+        }
+      }
+    });
+
+    // init AOS
+    (function(){ var s=document.createElement('script'); s.src='https://unpkg.com/aos@2.3.1/dist/aos.js'; s.onload=function(){ AOS.init({once:true,duration:700}); }; document.head.appendChild(s); })();
+
+    // optional audio autostart
+    (function(){
+      const audio = document.createElement('audio');
+      audio.id='audio';
+      audio.src='https://youtu.be/ZeFpigRaXbI?si=6haPw7GLElhDuul7';
+      audio.loop = true;
+      audio.preload = 'auto';
+      document.body.appendChild(audio);
+    })();
+
+    // accessibility: allow keyboard Enter on open button
+    document.getElementById('openBtn').addEventListener('keyup', (e)=>{ if(e.key==='Enter') e.target.click(); });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
